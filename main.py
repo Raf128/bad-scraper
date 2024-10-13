@@ -25,7 +25,7 @@ def scrape(url, keyword):
             else:
                 #if not, it will simply state that it failed
                 print('Does not include keyword :(')
-                return "failed, site does not inclue keyword"
+                return "failed, site does not include keyword"
             urlc += 1
 
 #HTML cleaner function, turns html source into what the page would generally look like in a browser
@@ -53,12 +53,15 @@ html = scrape(url, keyw)
 cleaned = cleantext(html)
 
 #ask if they want terminal output
-show = input("Print HTML source? y/n\n").lower()
-show2 = input("Print cleaned text? y/n\n").lower()
-if show == "y":
+if "failed" in html:
     print(html)
-if show2 == "y":
-    print(cleaned)
+else:
+    show = input("Print HTML source? y/n\n").lower()
+    show2 = input("Print cleaned text? y/n\n").lower()
+    if show == "y":
+        print(html)
+    if show2 == "y":
+        print(cleaned)
 
 # export data to file for data extraction
 print('Exported to data.txt')
