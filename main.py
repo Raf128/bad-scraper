@@ -6,32 +6,28 @@ import json
 
 #the main function, gets contents of page
 def scrape(url, keyword):
-    #get the data form the url, variable below is counter, loop through list
-    urlc = 0
-    for string in url:
-        response = requests.get(url[urlc])
-        #make sure it's a successfull request
-        if response.status_code != 200:
-            if response.status_code == 404:
-                print("404 not found")
-            elif response.status_code == 403:
-                print("403 forbidden")
-            else:
-                print(response.status_code)
-            print("request FAILED! The server/site directory doesn't exist or doesn't want you etc.")
-            return "failed, connection error"
+    response = requests.get(url[urld])
+    #make sure it's a successfull request
+    if response.status_code != 200:
+        if response.status_code == 404:
+            print("404 not found")
+        elif response.status_code == 403:
+            print("403 forbidden")
         else:
-            print(response)
-            #if it is, look for keyword
-            if keyw in (response.text).lower():
-                #if all goes well, HTML source code is obtained
-                print('success!')
-                return response.text
-            else:
-                #if not, it will simply state that it failed
-                print('Does not include keyword :(')
-                return "failed, site does not include keyword"
-            urlc += 1
+            print(response.status_code)
+        print("request FAILED! The server/site directory doesn't exist or doesn't want you etc.")
+        return "failed, connection error"
+    else:
+        print(response)
+        #if it is, look for keyword
+        if keyw in (response.text).lower():
+        #if all goes well, HTML source code is obtained
+            print('success!')
+            return response.text
+        else:
+            #if not, it will simply state that it failed
+            print('Does not include keyword :(')
+            return "failed, site does not include keyword"
 
 #HTML cleaner function, turns html source into what the page would generally look like in a browser
 def cleantext(content):
@@ -53,6 +49,7 @@ for string in url:
         url[urld] = "http://" + url[urld]
     urld += 1
 
+urld = 0
 # big ugly loop
 for string in url:
     html = scrape(url, keyw)
@@ -73,3 +70,4 @@ for string in url:
         f.write(cleaned)
         f.close()
     print('Exported to data.txt')
+    urld += 1
