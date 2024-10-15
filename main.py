@@ -6,7 +6,7 @@ import json
 
 #the main function, gets contents of page
 def scrape(url, keyword):
-    response = requests.get(url[urld])
+    response = requests.get(url[i])
     #make sure it's a successfull request
     if response.status_code != 200:
         if response.status_code == 404:
@@ -43,15 +43,13 @@ url = url.split()
 keyw = input('Enter a keyword to search for (leave blank for no keyword)\n')
 
 #check that the idiot added http(s)
-urld = 0
-for string in url:
-    if ("http" and "://") not in url[urld]:
-        url[urld] = "http://" + url[urld]
-    urld += 1
 
-urld = 0
+for i, string in enumerate(url):
+    if ("http" and "://") not in url[i]:
+        url[i] = "http://" + url[i]
+
 # big ugly loop
-for string in url:
+for i, string in enumerate(url):
     html = scrape(url, keyw)
     cleaned = cleantext(html)
     if "failed" in html:
@@ -70,4 +68,3 @@ for string in url:
         f.write(cleaned)
         f.close()
     print('Exported to data.txt')
-    urld += 1
