@@ -10,6 +10,10 @@ except Exception as e:
     if depend.lower() == 'y':
         try:
             os.system('pip install requests && pip install html2text')
+            import requests
+            import html2text
+            import json
+            import os
         except Exception as e:
             print('Error installing dependencies:', e)
             exit(2)
