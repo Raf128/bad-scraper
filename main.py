@@ -1,8 +1,22 @@
 #Modules that are required
 #Requests and html2text must be installed
-import requests
-import html2text
-import json
+try:
+    import requests
+    import html2text
+    import json
+    import os
+except Exception as e:
+    depend = input(e, 'Dependencies are not installed, download?\n')
+    if depend.lower() == 'y':
+        try:
+            os.system('pip install requests && pip install html2text')
+        except Exception as e:
+            print('Error installing dependencies:', e)
+            exit(2)
+    else:
+        exit(1)
+
+
 
 #the main function, gets contents of page
 def scrape(url, keyword):
