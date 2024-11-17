@@ -8,13 +8,18 @@ import json
 def scrape(url, keyword):
     response = requests.get(url[i])
     #make sure it's a successfull request
+    #I could probably do this better
     if response.status_code != 200:
         if response.status_code == 404:
             print("404 not found")
         elif response.status_code == 403:
             print("403 forbidden")
         else:
-            print(response.status_code)
+            if "5" in str(response.status_code):
+                print("Server Error")
+            elif "3" in str(response.status_code):
+                print("Multiple Choices")
+            print("Error", response.status_code)
         print("request FAILED! The server/site directory doesn't exist or doesn't want you etc.")
         return "failed, connection error"
     else:
@@ -48,7 +53,7 @@ for i, string in enumerate(url):
     if ("http" and "://") not in url[i]:
         url[i] = "http://" + url[i]
 
-# big ugly loop
+# big ugly loop (not actually that bad, i just don't like loops)
 for i, string in enumerate(url):
     html = scrape(url, keyw)
     cleaned = cleantext(html)
@@ -67,4 +72,4 @@ for i, string in enumerate(url):
         f.write(str(html))
         f.write(cleaned)
         f.close()
-    print('Exported to data.txt')
+    print('Exported to data.txt\n')
