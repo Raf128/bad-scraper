@@ -14,7 +14,6 @@ except:
             exit(2)
     else:
         exit(1)
-date = os.system('%date:~-4%%date:~3,2%%date:~0,2%%time:~0,2%%time:~3,2%%time:~6,2%')
 
 model = input('Enter your chat api model (gpt-4o, gpt-4 etc.). Defalts to gpt-4o-mini\n')
 
@@ -37,7 +36,6 @@ def chat():
             exit(1)
 
         if 'scan' in userPrompt.lower():
-            userPrompt += "past the date", date
             userPrompt += data
         
         #Pretty Sure this is JSON (I know it's JSON)
