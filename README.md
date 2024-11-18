@@ -1,2 +1,4 @@
-IT DOESN'T LIKE YOU  
-Dependencies are html2text and requests
+# Why should I use this?
+
+No reason, it's just there  
+Now with extra AI! 
